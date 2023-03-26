@@ -28,7 +28,11 @@ router.get("/products/:id", (request, response) => {
     const error = { message: "Not Found" };
 
     if (!product)
-      return response.render("error", { pageTitle: error.title, error });
+      return response.render("error", {
+        pageTitle: error.title,
+        path: "*",
+        error,
+      });
 
     response.render("product-detail", {
       pageTitle: product.title,

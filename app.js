@@ -21,7 +21,7 @@ app.use(adminRoutes);
 
 app.get("*", (request, response) => {
   const error = { message: "Not Found" };
-  response.render("error", { pageTitle: error.title, error });
+  response.render("error", { pageTitle: error.title, path: "*", error });
 });
 
 app.listen(5000);

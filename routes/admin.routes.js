@@ -32,4 +32,22 @@ router.post("/admin/add-product", (request, response) => {
   });
 });
 
+router.get("/admin/products", (request, response) => {
+  fs.readFile(productsDataPath, (err, products) => {
+    response.render("admin-products", {
+      pageTitle: "Admin Products",
+      path: "/admin/products",
+      products: JSON.parse(products),
+    });
+  });
+});
+
+router.get("/admin/orders", (request, response) => {
+  response.render("admin-orders", {
+    pageTitle: "Admin Orders",
+    path: "/admin/orders",
+    products: JSON.parse(products),
+  });
+});
+
 module.exports = router;
