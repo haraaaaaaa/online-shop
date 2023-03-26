@@ -1,0 +1,15 @@
+<%- include("includes/head.ejs") %>
+</head>
+<body>
+    <h1>List of products</h1>
+    <% if (products.length === 0) { %>
+     <h1>There are no products.</h1>
+    <% } else { %>
+        <ul>
+        <% for(const product of products) { %>
+            <%- include("includes/product.ejs", {product}) %>
+        <% } %>
+        </ul>
+    <% }%>
+</body>
+</html>

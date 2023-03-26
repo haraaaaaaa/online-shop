@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.22"
+  },
+  "name": "online-shop",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haraaaaaaa/online-shop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haraaaaaaa/online-shop/issues"
+  },
+  "homepage": "https://github.com/haraaaaaaa/online-shop#readme",
+  "description": ""
+}
