@@ -1,0 +1,28 @@
+.nav{
+    width: 100vw;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo{
+    font-weight: 400;
+}
+.nav__logo span{
+    color: rgb(21, 146, 196)
+}
+
+.nav__links{
+    display: flex;
+    gap: 2rem;
+}
+.nav__links a{
+    text-decoration: none;
+    color: black;
+}
+.nav__links a:hover{
+    color: rgb(21, 146, 196);
+    border-bottom: 1px solid rgb(21, 146, 196);
+    transition: 0.4s;  
+}
