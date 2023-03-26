@@ -9,7 +9,10 @@ const router = express.Router();
 const productsDataPath = path.join(__dirname, "..", "data", "products.json");
 
 router.get("/admin/add-product", (request, response) => {
-  response.render("add-product", { pageTitle: "Add new product" });
+  response.render("add-product", {
+    pageTitle: "Add new product",
+    path: "/admin/add-product",
+  });
 });
 
 router.post("/admin/add-product", (request, response) => {

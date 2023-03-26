@@ -14,6 +14,7 @@ router.get("/products", (request, response) => {
   fs.readFile(productsDataPath, (err, products) => {
     response.render("index", {
       pageTitle: "Web Shop",
+      path: "/products",
       products: JSON.parse(products),
     });
   });
@@ -31,6 +32,7 @@ router.get("/products/:id", (request, response) => {
 
     response.render("product-detail", {
       pageTitle: product.title,
+      path: "/products",
       product,
     });
   });
