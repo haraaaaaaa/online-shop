@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const { v4 } = require("uuid");
 
 // server setup
 const app = express();
@@ -17,7 +18,9 @@ app.listen(5000);
 const productsDataPath = path.join(__dirname, "data", "products.json");
 
 // routing
-app.get("/", (request, response) => {
+app.get("/", (request, response) => response.redirect("/products"));
+
+app.get("/products", (request, response) => {
   fs.readFile(productsDataPath, (error, products) => {
     response.render("index", {
       pageTitle: "Web Shop",
@@ -33,8 +36,14 @@ app.get("/admin/add-product", (request, response) => {
 app.post("/admin/add-product", (request, response) => {
   const { title, price } = request.body;
 
+  const product = {
+    id: v4(),
+    title,
+    price,
+  };
+
   fs.readFile(productsDataPath, (error, products) => {
-    const updatedProducts = [{ title, price }, ...JSON.parse(products)];
+    const updatedProducts = [product, ...JSON.parse(products)];
     fs.writeFile(productsDataPath, JSON.stringify(updatedProducts), () => {
       response.redirect("/");
     });

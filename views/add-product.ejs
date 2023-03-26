@@ -1,10 +1,11 @@
 <%- include("includes/head.ejs") %>
 </head>
 <body>
+    <%- include("includes/navbar.ejs") %>
     <form action="/admin/add-product" method="post">
         <input type="text" placeholder="Title" name="title">
         <input type="text" placeholder="Price" name="price">
-        <button type="submit">Add product</button>
+        <button type="submit">Add Product</button>
     </form>
 </body>
 </html>
