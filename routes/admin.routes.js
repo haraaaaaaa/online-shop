@@ -21,7 +21,7 @@ router.post("/admin/add-product", (request, response) => {
     price,
   };
 
-  fs.readFile(productsDataPath, (error, products) => {
+  fs.readFile(productsDataPath, (err, products) => {
     const updatedProducts = [product, ...JSON.parse(products)];
     fs.writeFile(productsDataPath, JSON.stringify(updatedProducts), () => {
       response.redirect("/");
