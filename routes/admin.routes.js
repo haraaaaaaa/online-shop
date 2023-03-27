@@ -46,7 +46,6 @@ router.get("/admin/orders", (request, response) => {
   response.render("admin-orders", {
     pageTitle: "Admin Orders",
     path: "/admin/orders",
-    products: JSON.parse(products),
   });
 });
 
