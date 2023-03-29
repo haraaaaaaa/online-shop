@@ -1,12 +1,8 @@
 // requirements
 const express = require("express");
 const router = express.Router();
+const { getCart } = require("../controllers/cart-controllers");
 
-router.get("/cart", (request, response) => {
-  response.render("cart", {
-    pageTitle: "Cart",
-    path: "/cart",
-  });
-});
+router.get("/cart", getCart);
 
 module.exports = router;

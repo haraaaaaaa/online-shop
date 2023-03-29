@@ -16,15 +16,13 @@ app.use(express.static("public"));
 const productsRoutes = require("./routes/products.routes");
 const adminRoutes = require("./routes/admin.routes");
 const cartRoutes = require("./routes/cart.routes");
+const errorControllers = require("./controllers/error-controllers");
 
 app.use(productsRoutes);
 app.use(adminRoutes);
 app.use(cartRoutes);
 
-app.get("*", (request, response) => {
-  const error = { message: "Not Found" };
-  response.render("error", { pageTitle: error.title, path: "*", error });
-});
+app.get("*", errorControllers.get404);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
