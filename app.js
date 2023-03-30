@@ -1,8 +1,10 @@
 // requirements
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
-const { v4 } = require("uuid");
+const productsRoutes = require("./routes/products.routes");
+const adminRoutes = require("./routes/admin.routes");
+const cartRoutes = require("./routes/cart.routes");
+const errorControllers = require("./controllers/error-controllers");
 
 // server setup
 const app = express();
@@ -13,11 +15,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-const productsRoutes = require("./routes/products.routes");
-const adminRoutes = require("./routes/admin.routes");
-const cartRoutes = require("./routes/cart.routes");
-const errorControllers = require("./controllers/error-controllers");
-
+// routing
 app.use(productsRoutes);
 app.use(adminRoutes);
 app.use(cartRoutes);

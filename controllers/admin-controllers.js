@@ -1,7 +1,6 @@
 // requirements
 const path = require("path");
 const fs = require("fs");
-const { v4 } = require("uuid");
 const Product = require("../models/Product");
 
 const productsDataPath = path.join(__dirname, "..", "data", "products.json");
