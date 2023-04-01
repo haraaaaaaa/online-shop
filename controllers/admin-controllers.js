@@ -7,7 +7,7 @@ const productsDataPath = path.join(__dirname, "..", "data", "products.json");
 
 exports.getAddProduct = (request, response) => {
   response.render("add-product", {
-    pageTitle: "Add new product",
+    pageTitle: "Add New Product",
     path: "/admin/add-product",
   });
 };
