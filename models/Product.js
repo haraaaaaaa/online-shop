@@ -1,7 +1,8 @@
-// requirements
+// Requirements
 const path = require("path");
 const fs = require("fs");
-const { v4 } = require("uuid");
+const { getDB } = require("../util/database");
+const { ObjectId } = require("bson");
 
 const productsDataPath = path.join(__dirname, "..", "data", "products.json");
 
@@ -16,19 +17,14 @@ const getProductsFromFile = (cb) => {
 };
 
 module.exports = class Product {
-  constructor(title, price, id) {
-    this.id = v4();
+  constructor(title, price, categoryId) {
     this.title = title;
     this.price = price;
+    this.categoryId = new ObjectId(categoryId);
   }
 
-  save() {
-    getProductsFromFile((products) => {
-      products.push(this);
-      fs.writeFile(productsDataPath, JSON.stringify(products), (err) => {
-        console.log(err);
-      });
-    });
+  async save() {
+    await getDB().collection("products").insertOne(this);
   }
 
   static fetchAll(cb) {
