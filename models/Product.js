@@ -1,20 +1,6 @@
 // Requirements
-const path = require("path");
-const fs = require("fs");
 const { getDB } = require("../util/database");
 const { ObjectId } = require("bson");
-
-const productsDataPath = path.join(__dirname, "..", "data", "products.json");
-
-const getProductsFromFile = (cb) => {
-  fs.readFile(productsDataPath, (err, fileContent) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(fileContent));
-    }
-  });
-};
 
 module.exports = class Product {
   constructor(title, price, categoryId) {
@@ -24,17 +10,16 @@ module.exports = class Product {
   }
 
   async save() {
-    await getDB().collection("products").insertOne(this);
+    return await getDB().collection("products").insertOne(this);
   }
 
-  static fetchAll(cb) {
-    getProductsFromFile(cb);
+  static async fetchAll() {
+    return await getDB().collection("products").find().toArray();
   }
 
-  static findById(id, cb) {
-    getProductsFromFile((products) => {
-      const product = products.find((product) => product.id === id);
-      cb(product);
-    });
+  static async findById(id) {
+    return await getDB()
+      .collection("products")
+      .findOne({ _id: new ObjectId(id) });
   }
 };

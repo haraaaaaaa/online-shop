@@ -1,10 +1,6 @@
-// requirements
-const path = require("path");
-const fs = require("fs");
+// Requirements
 const Product = require("../models/Product");
 const Category = require("../models/Category");
-
-const productsDataPath = path.join(__dirname, "..", "data", "products.json");
 
 exports.getAddProduct = async (request, response) => {
   const categories = await Category.fetchAll();
@@ -22,13 +18,12 @@ exports.postAddProduct = async (request, response) => {
   response.redirect("/");
 };
 
-exports.getAdminProducts = (request, response) => {
-  Product.fetchAll((products) => {
-    response.render("admin-products", {
-      pageTitle: "Admin Products",
-      path: "/admin/products",
-      products,
-    });
+exports.getAdminProducts = async (request, response) => {
+  const products = await Product.fetchAll();
+  response.render("admin-products", {
+    pageTitle: "Admin Products",
+    path: "/admin/products",
+    products,
   });
 };
 

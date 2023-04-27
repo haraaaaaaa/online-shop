@@ -1,37 +1,31 @@
-// requirements
-const path = require("path");
-const fs = require("fs");
+// Requirements
 const Product = require("../models/Product");
 
-const productsDataPath = path.join(__dirname, "..", "data", "products.json");
-
-exports.getProducts = (request, response) => {
-  Product.fetchAll((products) => {
-    response.render("index", {
-      pageTitle: "Web Shop",
-      path: "/products",
-      products: products,
-    });
+exports.getProducts = async (request, response) => {
+  const products = await Product.fetchAll();
+  response.render("index", {
+    pageTitle: "Web Shop",
+    path: "/products",
+    products,
   });
 };
 
-exports.getProduct = (request, response) => {
+exports.getProduct = async (request, response) => {
   const { id } = request.params;
 
-  Product.findById(id, (product) => {
-    const error = { message: "Not Found" };
+  const product = await Product.findById(id);
 
-    if (!product)
-      return response.render("error", {
-        pageTitle: error.title,
-        path: "*",
-        error,
-      });
-
-    response.render("product-detail", {
-      pageTitle: product.title,
-      path: "/products",
-      product,
+  const error = { message: "Not Found" };
+  if (!product)
+    return response.render("error", {
+      pageTitle: error.title,
+      path: "*",
+      error,
     });
+
+  response.render("product-detail", {
+    pageTitle: product.title,
+    path: "/products",
+    product,
   });
 };
