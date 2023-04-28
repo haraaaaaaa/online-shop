@@ -1,7 +1,6 @@
 // Requirements
 const Product = require("../models/Product");
 const Category = require("../models/Category");
-const { response } = require("express");
 
 exports.getAddProduct = async (request, response) => {
   const categories = await Category.fetchAll();
