@@ -1,0 +1,36 @@
+.error{
+    width: 65%;
+    height: auto;
+    margin: auto;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px 9px -6px black;
+}
+
+.error h1{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.error a {
+    background-color: rgb(21, 146, 196);
+    color: #eee;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 9px -6px black;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    max-width: 25%;
+    text-align: center;
+}
+
+.error a:hover {
+    background-color: #335faf;
+    transition: 0.5s;
+}
