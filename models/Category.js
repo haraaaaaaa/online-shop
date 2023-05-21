@@ -1,8 +1,8 @@
-// Requirements
-const { getDB } = require("../util/database");
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-module.exports = class Category {
-  static async fetchAll() {
-    return await getDB().collection("categories").find().toArray();
-  }
-};
+const categorySchema = new Schema({
+  name: String,
+});
+
+mongoose.model("categories", categorySchema);

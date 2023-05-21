@@ -1,9 +1,9 @@
-// Requirements
-const Product = require("../models/Product");
-const Category = require("../models/Category");
+const mongoose = require("mongoose");
+const Product = mongoose.model("products");
+const Category = mongoose.model("categories");
 
 exports.getAddProduct = async (request, response) => {
-  const categories = await Category.fetchAll();
+  const categories = await Category.find();
   response.render("add-product", {
     pageTitle: "Add New Product",
     path: "/admin/add-product",
@@ -13,13 +13,14 @@ exports.getAddProduct = async (request, response) => {
 
 exports.postAddProduct = async (request, response) => {
   const { title, price, category } = request.body;
-  const product = new Product(title, price, category);
-  await product.save();
+
+  await Product.create({ title, price, category });
+
   response.redirect("/");
 };
 
 exports.getAdminProducts = async (request, response) => {
-  const products = await Product.fetchAll();
+  const products = await Product.find();
   response.render("admin-products", {
     pageTitle: "Admin Products",
     path: "/admin/products",
@@ -38,7 +39,7 @@ exports.editProduct = async (request, response) => {
   const { id } = request.params;
 
   const product = await Product.findById(id);
-  const categories = await Category.fetchAll();
+  const categories = await Category.find();
 
   response.render("edit-product", {
     pageTitle: "Edit Product",
@@ -52,7 +53,12 @@ exports.postEditProduct = async (request, response) => {
   const { id } = request.params;
   const { title, price, category } = request.body;
 
-  const product = new Product(title, price, category, id);
+  const product = await Product.findById(id);
+
+  product.title = title;
+  product.price = price;
+  product.categoryId = category;
+
   await product.save();
 
   response.redirect("/admin/products");
@@ -61,6 +67,6 @@ exports.postEditProduct = async (request, response) => {
 exports.getDeleteProduct = async (request, response) => {
   const { id } = request.params;
 
-  await Product.deleteById(id);
+  await Product.deleteOne({ _id: id });
   response.redirect("/admin/products");
 };

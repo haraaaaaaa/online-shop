@@ -1,12 +1,7 @@
 // Requirements
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
-const productsRoutes = require("./routes/products.routes");
-const adminRoutes = require("./routes/admin.routes");
-const cartRoutes = require("./routes/cart.routes");
-const errorControllers = require("./controllers/error-controllers");
-
-const { connect } = require("./util/database");
 
 // Server Setup
 const app = express();
@@ -18,13 +13,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 // Routing
+require("./models/Product");
+require("./models/Category");
+
+const productsRoutes = require("./routes/products.routes");
+const adminRoutes = require("./routes/admin.routes");
+const cartRoutes = require("./routes/cart.routes");
+const errorControllers = require("./controllers/error-controllers");
+
 app.use(productsRoutes);
 app.use(adminRoutes);
 app.use(cartRoutes);
 
 app.get("*", errorControllers.get404);
 
-connect().then(() => {
+mongoose.connect("mongodb://127.0.0.1:27017/onlineshop").then(() => {
   app.listen(5000, () => {
     console.log("Server running on port 5000");
   });

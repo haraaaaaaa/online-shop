@@ -1,8 +1,8 @@
-// Requirements
-const Product = require("../models/Product");
+const mongoose = require("mongoose");
+const Product = mongoose.model("products");
 
 exports.getProducts = async (request, response) => {
-  const products = await Product.fetchAll();
+  const products = await Product.find();
   response.render("index", {
     pageTitle: "Web Shop",
     path: "/products",
